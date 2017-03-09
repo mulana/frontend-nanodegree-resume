@@ -11,26 +11,28 @@ var bio = {
 	"biopic" : "images/ASUdacity.jpg",
 	"skills" : ["JavaScript", "Twitter Bootstrap", "Responsive", "HTML/CSS", "Ruby on Rails"],
 	display: function () {
-		var formattedName = HTMLheaderName.replace("%data%", bio.name);
-		var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-		var formattedBiopic = HTMLbioPic.replace("%data%", bio.biopic);
-		var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-		$("#header").append(formattedName, formattedRole, formattedBiopic, formattedWelcomeMessage);
+		var formattedHeaderName = HTMLheaderName.replace("%data%", this.name);
+		var formattedHeaderRole = HTMLheaderRole.replace("%data%", this.role);
+		var formattedBiopic = HTMLbioPic.replace("%data%", this.biopic);
+		var formattedWelcomeMsg = HTMLwelcomeMsg.replace("%data%", this.welcomeMessage);
+		$("#topContacts").before(formattedHeaderName);
+		$("#topContacts").before(formattedHeaderRole);
+		$("#header").append(formattedBiopic, formattedWelcomeMsg);
 
 		if (bio.skills.length > 0) {
 			$("#header").append(HTMLskillsStart);
 			this.skills.forEach(function(skill) {
 				var formattedSkill = HTMLskills.replace("%data%", skill);
 				$("#skills").append(formattedSkill);
-			})
-		};
+			});
+		}
 		// bio.contacts.display();
 		var formattedMobile = HTMLmobile.replace("%data%", this.contacts.mobile);
 		var formattedEmail = HTMLemail.replace("%data%", this.contacts.email);
 		var formattedGitHub = HTMLgithub.replace("%data%", this.contacts.github);
 		var formattedLocation = HTMLlocation.replace("%data%", this.contacts.location);
 		$("#topContacts").append(formattedMobile, formattedEmail, formattedGitHub, formattedLocation);
-		$("#footerContacts").append(formattedMobile, formattedEmail, formattedGitHub, formattedLocation)
+		$("#footerContacts").append(formattedMobile, formattedEmail, formattedGitHub, formattedLocation);
 	}
 };
 
@@ -81,7 +83,7 @@ var work = {
 			var formattedJobLocation = HTMLworkLocation.replace("%data%", job.location);
 			var formattedJobDescription = HTMLworkDescription.replace("%data%", job.description);
 			var formattedJobEmployerTitle = formattedJobEmployer + formattedJobTitle;
-			$(".work-entry:last").append(formattedJobEmployerTitle, formattedJobDates, formattedJobLocation, formattedJobDescription)
+			$(".work-entry:last").append(formattedJobEmployerTitle, formattedJobDates, formattedJobLocation, formattedJobDescription);
 		});
 	}
 };
@@ -113,9 +115,9 @@ var projects = {
 				project.images.forEach(function (image) {
 					var formattedProjectImage = HTMLprojectImage.replace("%data%", image);
 					$(".project-entry:last").append(formattedProjectImage);
-				})
+				});
 			}
-		})
+		});
 	}
 };
 
@@ -144,17 +146,19 @@ var education = {
 			var formattedSchoolDates = HTMLschoolDates.replace("%data%", school.dates);
 			var formattedSchoolLocation = HTMLworkLocation.replace("%data%", school.location);
 			var formattedSchoolMajor = HTMLschoolMajor.replace("%data%", school.majors);
-			$(".education-entry:last").append(formattedSchoolName, formattedSchoolDegree, formattedSchoolDates, formattedSchoolLocation, formattedSchoolMajor)
+			$(".education-entry:last").append(formattedSchoolName, formattedSchoolDegree, formattedSchoolDates, formattedSchoolLocation, formattedSchoolMajor);
 		});
+		$(".education-entry:last").append(HTMLonlineClasses);
+		$("#education h3").addClass('onlineCourses');
+
 		this.onlineCourses.forEach(function(cours) {
-			$("#education").append(HTMLonlineClasses);
 			var formattedCourseTitle = HTMLonlineTitle.replace("%data%", cours.title);
 			var formattedCourseSchool = HTMLonlineSchool.replace("%data%", cours.school);
 			var formattedCourseDates = HTMLonlineDates.replace("%data%", cours.dates);
 			var formattedCourseUrl = HTMLonlineURL.replace("%data%", cours.url);
 			var formattedCourseTitleSchool = formattedCourseTitle + formattedCourseSchool;
-			$(".onlineEducation-entry").append(formattedCourseTitleSchool, formattedCourseDates, formattedCourseUrl)
-		})
+			$(".education-entry:last").append(formattedCourseTitleSchool, formattedCourseDates, formattedCourseUrl);
+		});
 	}
 };
 
